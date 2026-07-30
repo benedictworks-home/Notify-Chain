@@ -4,6 +4,7 @@ import { ExportHistoryTable } from '../components/ExportHistoryTable';
 import { PaginationControls } from '../components/PaginationControls';
 import { WalletConnectButton } from '../components/WalletConnectButton';
 import { EmptyState } from '../components/EmptyState';
+import { formatTimestamp } from '../utils/formatTime';
 
 // ──────────────────────────────────────────────────────────────────
 // Constants
@@ -57,14 +58,7 @@ function buildExportBlob(item: NotificationExport): { blob: Blob; filename: stri
   }
 
   // PDF — represented as plain text for mock purposes
-  const createdFormatted = new Date(item.createdAt).toLocaleString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true,
-  });
+  const createdFormatted = formatTimestamp(item.createdAt);
   const content =
     `Notify-Chain Notification Export Report\n` +
     `========================================\n` +

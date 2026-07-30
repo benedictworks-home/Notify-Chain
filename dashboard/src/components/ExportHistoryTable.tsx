@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import type { NotificationExport } from '../utils/exportData';
+import { formatTimestamp } from '../utils/formatTime';
 
 // ──────────────────────────────────────────────────────────────────
 // Types
@@ -8,21 +9,6 @@ import type { NotificationExport } from '../utils/exportData';
 export interface ExportHistoryTableProps {
   exports: NotificationExport[];
   onDownload: (item: NotificationExport) => void;
-}
-
-// ──────────────────────────────────────────────────────────────────
-// Helpers
-// ──────────────────────────────────────────────────────────────────
-
-function formatDate(timestamp: number): string {
-  return new Date(timestamp).toLocaleString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true,
-  });
 }
 
 // ──────────────────────────────────────────────────────────────────
@@ -126,7 +112,7 @@ function ExportRow({
         <FormatBadge format={item.format} />
       </td>
       <td className="export-table__cell-date" data-label="Created At">
-        {formatDate(item.createdAt)}
+        {formatTimestamp(item.createdAt)}
       </td>
       <td className="export-table__cell-numeric" data-label="Records">
         {item.recordCount.toLocaleString()}

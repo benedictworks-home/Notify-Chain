@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Modal } from './Modal';
+import { formatTimestamp, formatTimestampShort } from '../utils/formatTime';
 import type { 
   NotificationTemplate, 
   TemplateVariableValues,
@@ -112,13 +113,13 @@ export function TemplatePreviewModal({
             <div className="template-preview__metadata-item">
               <span className="template-preview__label">Created:</span>
               <span className="template-preview__value">
-                {template.createdAt.toLocaleString()}
+                {formatTimestamp(template.createdAt)}
               </span>
             </div>
             <div className="template-preview__metadata-item">
               <span className="template-preview__label">Updated:</span>
               <span className="template-preview__value">
-                {template.updatedAt.toLocaleString()}
+                {formatTimestamp(template.updatedAt)}
               </span>
             </div>
           </div>
@@ -212,7 +213,7 @@ function DiscordPreview({ payload }: { payload: DiscordPayload }) {
         <div className="preview-discord__avatar">N</div>
         <div className="preview-discord__author">
           <span className="preview-discord__name">NotifyChain Bot</span>
-          <span className="preview-discord__timestamp">Today at {new Date().toLocaleTimeString()}</span>
+          <span className="preview-discord__timestamp">Today at {formatTimestampShort(new Date())}</span>
         </div>
       </div>
       
@@ -251,7 +252,7 @@ function DiscordPreview({ payload }: { payload: DiscordPayload }) {
               )}
               {embed.timestamp && (
                 <div className="preview-discord__embed-timestamp">
-                  {new Date(embed.timestamp).toLocaleString()}
+                  {formatTimestamp(embed.timestamp)}
                 </div>
               )}
             </div>
@@ -302,7 +303,7 @@ function SmsPreview({ payload }: { payload: SmsPayload }) {
             {payload.message}
           </div>
           <div className="preview-sms__timestamp">
-            {new Date().toLocaleTimeString()}
+            {formatTimestampShort(new Date())}
           </div>
         </div>
       </div>
